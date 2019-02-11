@@ -1,0 +1,46 @@
+h1, h3, h4,a{
+    text-align: center;
+    font-family: "Georgia", serif;
+ }
+ legend{
+   font-weight: bold;
+   text-transform: uppercase;
+   font-size: 20px;
+   font-family: "Arial", "Helvetica", sans-serif;
+ }
+ 
+ label{
+   font-weight: bold; 
+   font-family: "Arial", "Helvetica", sans-serif;
+   display: block;
+   padding: 5px;
+ }
+ 
+ input[type=submit] {
+   padding: 12px 20px;
+   margin: 8px 0;
+   box-sizing: border-box;
+   background-color:lightgray;
+ }
+ 
+ input[type=text]:hover,input[type=password]:hover {
+   background-color:red;
+ }
+ 
+ input[type=email]:hover,input[type=password]:hover {
+    background-color:red;
+  }
+
+ input[type=text]:focus,input[type=password]:focus {
+   background-color:yellow;
+ }
+ 
+ button:hover {
+   box-sizing: border-box;
+   background-color:rgb(85, 83, 83);
+ }
+ 
+ button{
+   text-align: center;
+   align-content: center;
+ }
