@@ -72,8 +72,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                
                 //echo "<p> Usuario correcto.La conexion es correcta. </p>";
                 //Se guarda la sesion
+                
                 $app->saveSession($usuario);//Se guarda la sesion de ese usuario
-             
+                var_dump($usuario);
 
                  //Se redirecciona
                  echo "<script languaje=\"javascript\">window.location.href=\"listAulas.php\"</script>"; //Nuevo añadido

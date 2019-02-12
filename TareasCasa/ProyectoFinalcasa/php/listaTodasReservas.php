@@ -1,10 +1,10 @@
 <?php
 include_once("app.php");
-App::print_head("Listado de Aulas.");
+App::print_head("Listado de Reservas.");
 App::print_nav_listaulas();
 $app = new App();
 $app->validateSession(); //Esta función inicia sesión y comprueba si está logueado.
-$resultset=$app->getAulas();
+$resultset=$app->getAulasReservas();
 
 //1. Error con la BD
 if (!$resultset)
@@ -16,7 +16,7 @@ else
     //print_r($list);
     //2.1 Si no hay elementos
     if (count($list)==0)
-        echo "<p>No hay aulas registradas.</p>";
+        echo "<p>No hay aulas reservadas.</p>";
     //2.2 Hay aulas
     else
     {
@@ -33,11 +33,11 @@ else
 
         foreach ($list as $fila) {
             echo "<tr>";
-            echo "<td scope=\"row\"> <a href='reservaAula.php?nombreCorto=".$fila['nombreCorto']."'/>".$fila['nombreCorto']."</td>".
-            "<td scope=\"row\">".$fila['nombreDescripcion']."</td>".
-            "<td scope=\"row\">".$fila['ubicacion']."</td>".
-            "<td scope=\"row\">".$fila['tic']."</td>".
-            "<td scope=\"row\">".$fila['nOrdenadores']."</td>";
+            echo "<td scope=\"row\">".$fila['nickUsuario']."</td>".
+            "<td scope=\"row\"> <a href='reservaAula.php?nombreCortoAula=".$fila['nombreCortoAula']."'/>".$fila['nombreCortoAula']."</td>".
+            "<td scope=\"row\">".$fila['fReserva']."</td>".
+            "<td scope=\"row\">".$fila['horaIniresr']."</td>".
+            "<td scope=\"row\">".$fila['horaFinreser']."</td>";
             echo "</tr>";
         }
 

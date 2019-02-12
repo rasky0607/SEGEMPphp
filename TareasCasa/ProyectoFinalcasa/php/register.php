@@ -60,7 +60,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
     $fnac=$_POST["fnac"];
     $email=$_POST["correo"];
 
-    echo "Datos : ".$nick." ".$password." ".$passwordconfir." ".$fnac." ".$email;
+   // echo "Datos : ".$nick." ".$password." ".$passwordconfir." ".$fnac." ".$email;
     if(empty($nick))
     echo"<p class=\"text-center\">El nombre de usuario esta vacio.</p>";
     else if(empty($password))
@@ -77,15 +77,12 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
     echo"<p class=\"text-center\">Necesita introducir un correo</p>";
     else if(!empty($password) && !empty($nick) && !empty($passwordconfir)&& !empty($nombre)&& !empty($fnac)&& !empty($email))//Si todo esta lleno
     {
-        $app = new APP();
-        if($app->Registrarse($nick,$password,$nombre,$fnac,$email))
-        {
-            echo"INSECION EXITOSA";
-        }
-        else
-        {
-            echo"INSERCION FALLIDA!";
-        }
+        $app = new App();
+        $app->Registrarse($nick,$password,$nombre,$fnac,$email);
+        
+   
+        
+      
         //echo"<p class=\"text-center\">TODO LLENO</p>";
     }
 

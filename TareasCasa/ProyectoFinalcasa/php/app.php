@@ -60,61 +60,31 @@ function print_head($title="Página SEGEMP"){
   
         }
 
-        //Funcion que imprime el menú del sitio web
-      function print_nav_ausencias(){
-        echo"      
-        <div class=\"p-1 mb-2 bg-success text-white\"/>
-        <nav class=\"navbar navbar-expand-lg navbar-dark\">              
-        <span class=\"navbar-brand mb-0 h1\"><u>Ausencias:</u></span>
-        <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">
-            <ul class=\"navbar-nav mr-auto\">
-        
-            <li class=\"nav-item active\">
-                <a class=\"nav-link\" href=\"listabsenceAll.php\">Listado de ausencias <span class=\"sr-only\">(current)</span></a>
-            </li>
-            <li class=\"nav-item dropdown\">
-            <span class=\"nav-item active\"> <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuLink\" role=\"button\"
-                 data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                Gestión de ausencias
-                </a></sapn>
-                <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuLink\">
-                    <a class=\"dropdown-item disabled\" data-toggle=\"modal\" href=\"#\">Alta ausencia</a>
-                    <a class=\"dropdown-item disabled\" href=\"#\">Editar ausencia</a>
-                    <a class=\"dropdown-item\" href=\"formSearchAbsenDate.php\">Filtrar ausencias</a>
-                </div> 
-                </li>                                 
-              </li>
-              <li class=\"nav-item active\">
-              <a class=\"nav-link\" href=\"liststudent.php\">Listado de alumnos <span class=\"sr-only\">(current)</span></a>
-          </li>            
-            </ul>
-           <span class=\"navbar-brand mb-0 h1\"><a class=\"nav-link\" href=\"logout.php\">Cerrar sesión</a></span>
-          </nav> 
-          </div>";
-        }
-
+    
          //Funcion que imprime el menú del sitio web
-      function print_nav_listalumnos(){
+      function print_nav_listaulas(){
           echo"       
           <div class=\"p-1 mb-2 bg-success text-white\"/>
           <nav class=\"navbar navbar-expand-lg navbar-dark\">              
-          <span class=\"navbar-brand mb-0 h1\"><u>Alumnado:</u></span>
+          <span class=\"navbar-brand mb-0 h1\"><u>Aulas:</u></span>
           <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">
               <ul class=\"navbar-nav mr-auto\">
               <li class=\"nav-item dropdown\">
               <span class=\"nav-item active\"> <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuLink\" role=\"button\"
                    data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                  Gestión de Alumnos
+                  Gestión de Aulas
                   </a></sapn>
-                  <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuLink\">
-                      <a class=\"dropdown-item disabled\" data-toggle=\"modal\" data-target=\"#exampleModal\" href=\"#\">Alta alumno</a>
-                      <a class=\"dropdown-item disabled\" href=\"#\">Editar alumno</a>
-                      <a class=\"dropdown-item\" href=\"consultabsence.php\">Consultar Alumno</a>
+                  <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuLink\">   
+                      <a class=\"dropdown-item\" href=\"listAulas.php\">Listar Aulas</a>                  
+                      <a class=\"dropdown-item\" href=\"reservaAula.php\">Reservar aula</a>
+                      <a class=\"dropdown-item\" href=\"buscarAula.php\">Buscar Aula</a>
+                      <a class=\"dropdown-item\" href=\"misReservas.php\">Consultar reservas de un aula</a>
+                      <a class=\"dropdown-item\" href=\"misReservas.php\">Consultar mis reservas</a>
                   </div> 
                   </li>                                 
                 </li>
                 <li class=\"nav-item active\">
-                <a class=\"nav-link\" href=\"listabsenceAll.php\">Listado de ausencias <span class=\"sr-only\">(current)</span></a>
+                <a class=\"nav-link\" href=\"listaTodasReservas.php\">Listado de aulas reservadas <span class=\"sr-only\">(current)</span></a>
             </li>            
               </ul>
              <span class=\"navbar-brand mb-0 h1\"><a class=\"nav-link\" href=\"logout.php\">Cerrar sesión</a></span>
@@ -132,37 +102,7 @@ function print_head($title="Página SEGEMP"){
         </footer>";
         }
 
-        function print_nav_ausenciasSearchDateRanged(){
-          echo"      
-          <div class=\"p-1 mb-2 bg-success text-white\"/>
-          <nav class=\"navbar navbar-expand-lg navbar-dark\">              
-          <span class=\"navbar-brand mb-0 h1\"><u>Ausencias:</u></span>
-          <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">
-              <ul class=\"navbar-nav mr-auto\">
-          
-              <li class=\"nav-item active\">
-                  <a class=\"nav-link\" href=\"listabsenceAll.php\">Volver a todas las ausencias <span class=\"sr-only\">(current)</span></a>
-              </li>
-              <li class=\"nav-item dropdown\">
-              <span class=\"nav-item active\"> <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuLink\" role=\"button\"
-                   data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                  Gestión de ausencias
-                  </a></sapn>
-                  <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuLink\">
-                      <a class=\"dropdown-item disabled\" data-toggle=\"modal\" href=\"#\">Alta ausencia</a>
-                      <a class=\"dropdown-item disabled\" href=\"#\">Consultar ausencias de un dia</a>
-                      <a class=\"dropdown-item\" href=\"formSearchAbsenDate.php\">Volver a filtrar</a>
-                  </div> 
-                  </li>                                 
-                </li>
-                <li class=\"nav-item active\">
-                <a class=\"nav-link\" href=\"liststudent.php\">Listado de alumnos <span class=\"sr-only\">(current)</span></a>
-            </li>            
-              </ul>
-             <span class=\"navbar-brand mb-0 h1\"><a class=\"nav-link\" href=\"logout.php\">Cerrar sesión</a></span>
-            </nav> 
-            </div>";
-          } 
+      
 
         //Funcion que devuelve la unica conexion a la BD
       function getDao(){
@@ -180,8 +120,26 @@ function print_head($title="Página SEGEMP"){
         return $this->dao->InsertNuevoUsuario($nick,$password,$nombre,$fnac,$email);
       }
 
-      //------------------AUN SIN USO----------------------//
-      //Función que comprueba si existe el usuario
+      function getAulas(){
+        return $this->dao->SelectAulas();
+    }
+
+    function getBusquedaAula($nombreCorto)
+    {
+      return $this->dao->SelectAulaNombre($nombreCorto);
+    }
+
+    function getUsuarios()
+    {
+      return $this->dao->SelectUsuarios();
+    }
+
+    function getAulasReservas()
+    {
+      return $this->dao->SelectReservas();
+    }
+
+          //Función que comprueba si existe el usuario
       function isLogged(){
           return isset ($_SESSION['usuario']);
 
@@ -199,7 +157,7 @@ function print_head($title="Página SEGEMP"){
         function saveSession($usuario){
           $_SESSION['usuario']=$usuario;
 
-        }
+        }   
 
         function invalidateSession(){
           session_start();
@@ -209,14 +167,6 @@ function print_head($title="Página SEGEMP"){
           $this->showLogin();
       }
      
-      function getAulas(){
-          return $this->dao->SelectAulas();
-      }
-   
-
-    function getAbsencesFrom($idStudent){
-        return $this->dao->getAbsencesFrom($idStudent);
-    }
 
 
    
