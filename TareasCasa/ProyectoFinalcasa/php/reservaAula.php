@@ -88,7 +88,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
     $horaFinreser=$_POST["horaFinreser"];
 
     $yaExiste=$app->getReservasExistente($nombreCortoAula,$fechaReserva,$horaIniResr,$horaFinreser);
-    var_dump($yaExiste);
+    //var_dump($yaExiste);
     if(date($fechaReserva)<date("Y-m-d"))
         echo"<p class=\"text-center\">Las fecha de reserva no puede ser inferior a la actual</p>";
     else if(!ComparacionHoras($horaIniResr,$horaFinreser))
