@@ -1,9 +1,13 @@
 <?php
 include_once("app.php");
 App::print_head("Buscar Aula:");
-App::print_nav_listaulas();
 $app = new App();
 $app->validateSession();
+$nickUsuario;
+foreach($_SESSION as $elemento){
+    $nickUsuario=$elemento;
+}
+App::print_nav_listaulas($nickUsuario);
 $listAulas = $app->getAulas();
 $listAulas=$listAulas->fetchAll();
 ?>
@@ -57,7 +61,7 @@ else
     //print_r($list);
     //2.1 Si no hay elementos
     if (count($list)==0)
-        echo "<p>No hay aulas registradas.</p>";
+        echo "<p class=\"text-center\">Esa aula no esta registrada.</p>";
     //2.2 Hay aulas
     else
     {

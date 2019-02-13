@@ -1,6 +1,5 @@
 <?php
 include_once("app.php");
-
 //Para iniciar una sesion
 session_start();
 //llamada a metodos para pintar la cabecera plantilla de la pagina
@@ -56,7 +55,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
     }
     else if(empty($password))
     {
-        echo "<p class=\"text-center\">Debes introducir una contraseña</p>";
+        echo "<p class=\"text-center\">Debes introducir una contraseña</p>";       
     }
     else{
 
@@ -74,7 +73,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                 //Se guarda la sesion
                 
                 $app->saveSession($usuario);//Se guarda la sesion de ese usuario
-                var_dump($usuario);
+               
 
                  //Se redirecciona
                  echo "<script languaje=\"javascript\">window.location.href=\"listAulas.php\"</script>"; //Nuevo añadido
@@ -83,14 +82,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                 echo "<p  class=\"text-center\"> Usuario incorrecto. </p>";
             }
 
-
-
-               
-               
-        
-
-        //Redireccion a la pagina principal del proyecto de esta forma:
-        //echo "<script language='javascript'>window.location.href='aula.php'</script>";
     }
 }
 

@@ -1,9 +1,15 @@
 <?php
 include_once("app.php");
 App::print_head("Listado de Aulas.");
-App::print_nav_listaulas();
 $app = new App();
 $app->validateSession(); //Esta función inicia sesión y comprueba si está logueado.
+$nickUsuario;
+foreach($_SESSION as $elemento){
+    $nickUsuario=$elemento;
+} 
+App::print_nav_listaulas($nickUsuario);
+
+
 $resultset=$app->getAulas();
 
 //1. Error con la BD
@@ -16,7 +22,7 @@ else
     //print_r($list);
     //2.1 Si no hay elementos
     if (count($list)==0)
-        echo "<p>No hay aulas registradas.</p>";
+        echo "<p class=\"text-center\">No hay aulas registradas.</p>";
     //2.2 Hay aulas
     else
     {

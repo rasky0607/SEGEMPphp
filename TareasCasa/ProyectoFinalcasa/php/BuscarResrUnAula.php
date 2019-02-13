@@ -1,15 +1,55 @@
-<?php
+<<?php
 include_once("app.php");
-App::print_head("Listado de Reservas.");
+App::print_head("Buscar reservas de un aula:");
 $app = new App();
-$app->validateSession(); //Esta función inicia sesión y comprueba si está logueado.
+$app->validateSession();
 $nickUsuario;
 foreach($_SESSION as $elemento){
     $nickUsuario=$elemento;
 }
 App::print_nav_listaulas($nickUsuario);
-$resultset=$app->getAulasReservas();
+$listAulas = $app->getAulas();
+$listAulas=$listAulas->fetchAll();
+?>
 
+<br/>
+
+<div class="container">
+    <div class="row">
+<!--col-md- lo que ocupa los componentes de la pagina -->
+<!--offset-md- numero de columnas que debe dejar en los marjenes -->
+        <div class="col-30 col-md-20 offset-md-5">
+            <form method="POST" action="BuscarResrUnAula.php">
+            <label for="nombreAula">Nombre Aula:</label>
+            <select class="form-control" name="nombreAula" id="nombreAula" autofocus="autofocus">
+            <option value="-1"></option>
+            <?php
+                foreach ($listAulas as $item) {
+                    echo "<option value=".$item['nombreCorto'].">".$item['nombreCorto']."</option>";
+                    }
+            ?>
+            </select>
+
+        <div class="text-center">
+            <br/>
+            <hr/>
+            <input type="submit" value="Consulta" class="btn btn-primary">
+        </div>
+        </div>
+        </div>
+        <br/>
+        <hr/>
+    </form>
+</div>
+
+<?php
+
+App::print_footer();
+$app = new App();
+if($_SERVER["REQUEST_METHOD"]=="POST")
+    {
+        $nombreCortoAula=$_POST["nombreAula"];      
+        $resultset= $app->getBusquedaReservaAula($nombreCortoAula);            
 //1. Error con la BD
 if (!$resultset)
     echo "<p>Error al conectar al servidor: ".$app->getDao()->error."</p>";
@@ -20,7 +60,7 @@ else
     //print_r($list);
     //2.1 Si no hay elementos
     if (count($list)==0)
-        echo "<p class=\"text-center\"><h3>No hay aulas reservadas.<h3></p>";
+        echo "<p class=\"text-center\"><h3>No hay reservas.<h3></p>";
     //2.2 Hay aulas
     else
     {
@@ -50,6 +90,7 @@ else
     }
 }
 
-App::print_footer()
+}
+
 
 ?>

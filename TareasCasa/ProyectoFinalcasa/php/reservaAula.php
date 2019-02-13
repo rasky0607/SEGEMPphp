@@ -1,10 +1,14 @@
 <?php
 include_once("app.php");
 App::print_head("Reserva Aula");
-App::print_nav_listaulas();
-echo"<br/> <h1 class=\"text-center\">Reserva Aula:</h1>";
 $app=new App();
 $app->validateSession();
+$nickUsuario;
+foreach($_SESSION as $elemento){
+    $nickUsuario=$elemento;
+}
+App::print_nav_listaulas($nickUsuario);
+echo"<br/> <h1 class=\"text-center\">Reserva Aula:</h1>";
 $listAulas = $app->getAulas();
 $listAulas=$listAulas->fetchAll();
 
@@ -73,19 +77,56 @@ App::print_footer();
 if($_SERVER["REQUEST_METHOD"]=="POST")
 {  
     
-    $nik;
+    $nickUsuario;
     foreach($_SESSION as $elemento){
-        $nik=$elemento;
+        $nickUsuario=$elemento;
     }
-      
-    /**
-     * 
-     * Reserva de aula cogiendo el usuario que inicio sesion 
-     * Mostrar reservas de un aula concreta
-     * Consultar mis reservas cone l usuario que inicio sesion
-     */
+
+    $nombreCortoAula=$_POST["nombreCorto"];
+    $fechaReserva = $_POST["freserva"];
+    $horaIniResr=$_POST["horaIniresr"];
+    $horaFinreser=$_POST["horaFinreser"];
+
+    if(date($fechaReserva)<date("Y-m-d"))
+        echo"<p class=\"text-center\">Las fecha de reserva no puede ser inferior a la actual</p>";
+    else if(!ComparacionHoras($horaIniResr,$horaFinreser))
+        echo"<p class=\"text-center\">La hora de inicio de la reserva no puede ser superior o igual a la de fin de la reserva<p/>";    
+    else if($app->getReservasExistente($nombreCortoAula,$fechaReserva,$horaIniResr,$horaFinreser == true))
+    {
+        echo "<p class=\"text-center\">Ya existe una reserva para esa aula en esa fecha y esas horas.
+        </p>
+        <p class=\"text-center\">Datos:</p><p class=\"text-center\">-Nombre Aula: ".$nombreCortoAula."</p>
+        <p class=\"text-center\">-Fecha: ".$fechaReserva."</p>
+        <p class=\"text-center\">-Hora Inicio Reserva: ".$horaIniResr."</p>
+        <p class=\"text-center\">-Hora Fin Reserva: ".$horaFinreser."</p>";
+        
+    }
+    else
+        $app->RegistrarseReserva($nickUsuario,$nombreCortoAula,$fechaReserva,$horaIniResr,$horaFinreser);
+   
+}
+
+function ComparacionHoras($horaInicio,$horafin)
+{
+    if($horaInicio=="8:15"&&$horafin!="8:15")
+    return true;
+    if($horaInicio=="9:15"&&$horafin!="9:15"&&$horafin!="8:15")
+    return true;
+    if($horaInicio=="10:15"&&$horafin!="10:15"&&$horafin!="9:15"&&$horafin!="8:15")
+    return true;
+    if($horaInicio=="11:15"&&$horafin!="11:15"&&$horafin!="10:15"&&$horafin!="9:15"&&$horafin!="8:15")
+    return true;
+    if($horaInicio=="11:45"&&$horafin!="11:45"&&$horafin!="11:15"&&$horafin!="10:15"&&$horafin!="9:15"&&$horafin!="8:15")
+    return true;
+    if($horaInicio=="12:45"&&$horafin!="12:45"&&$horafin!="11:45"&&$horafin!="11:15"&&$horafin!="10:15"&&$horafin!="9:15"&&$horafin!="8:15")
+    return true;
+    if($horaInicio=="13:45"&&$horafin!="13:45"&&$horafin!="12:45"&&$horafin!="11:45"&&$horafin!="11:15"&&$horafin!="10:15"&&$horafin!="9:15"&&$horafin!="8:15")
+    return true;
+    if($horaInicio=="14:45")
+    return false;
 
 
+    return false;
 }
 
 ?>

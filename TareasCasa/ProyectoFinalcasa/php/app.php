@@ -5,8 +5,10 @@ private $dao;
 
 function __construct()
 {
-  $this->dao=new Dao();
+  $this->dao=new Dao(); 
 }
+
+
 
     //$title ="Página SEGEMP" es el valor por defecto indicado a este parametro si n o sele pasa nada
 function print_head($title="Página SEGEMP"){
@@ -59,14 +61,14 @@ function print_head($title="Página SEGEMP"){
             <br/> ";
   
         }
-
+       
     
          //Funcion que imprime el menú del sitio web
-      function print_nav_listaulas(){
+      function print_nav_listaulas($nickUsuario){ 
           echo"       
           <div class=\"p-1 mb-2 bg-success text-white\"/>
           <nav class=\"navbar navbar-expand-lg navbar-dark\">              
-          <span class=\"navbar-brand mb-0 h1\"><u>Aulas:</u></span>
+          <span class=\"navbar-brand mb-0 h1\"><u>Usuario: ".$nickUsuario."</u></span>
           <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">
               <ul class=\"navbar-nav mr-auto\">
               <li class=\"nav-item dropdown\">
@@ -78,7 +80,7 @@ function print_head($title="Página SEGEMP"){
                       <a class=\"dropdown-item\" href=\"listAulas.php\">Listar Aulas</a>                  
                       <a class=\"dropdown-item\" href=\"reservaAula.php\">Reservar aula</a>
                       <a class=\"dropdown-item\" href=\"buscarAula.php\">Buscar Aula</a>
-                      <a class=\"dropdown-item\" href=\"misReservas.php\">Consultar reservas de un aula</a>
+                      <a class=\"dropdown-item\" href=\"BuscarResrUnAula.php\">Consultar reservas de un aula</a>
                       <a class=\"dropdown-item\" href=\"misReservas.php\">Consultar mis reservas</a>
                   </div> 
                   </li>                                 
@@ -100,8 +102,7 @@ function print_head($title="Página SEGEMP"){
           <h4>Redes sociales</h4>
           <a href='http://facebook.com/mi-pagina-de-facebook'>Mi Facebook</a>
         </footer>";
-        }
-
+        }   
       
 
         //Funcion que devuelve la unica conexion a la BD
@@ -119,26 +120,45 @@ function print_head($title="Página SEGEMP"){
       {
         return $this->dao->InsertNuevoUsuario($nick,$password,$nombre,$fnac,$email);
       }
+      function RegistrarseReserva($nickUsuario,$nombreCortoAula,$fReserva,$horaIniresr,$horaFinreser)
+      {
+        return $this->dao->InsertReserva($nickUsuario,$nombreCortoAula,$fReserva,$horaIniresr,$horaFinreser);
+      }
 
-      function getAulas(){
+      function getAulas()
+      {
         return $this->dao->SelectAulas();
-    }
+      }
 
-    function getBusquedaAula($nombreCorto)
-    {
-      return $this->dao->SelectAulaNombre($nombreCorto);
-    }
+      function getBusquedaAula($nombreCorto)
+      {
+        return $this->dao->SelectAulaNombre($nombreCorto);
+      }
 
-    function getUsuarios()
-    {
-      return $this->dao->SelectUsuarios();
-    }
+      function getUsuarios()
+      {
+        return $this->dao->SelectUsuarios();
+      }
 
-    function getAulasReservas()
-    {
-      return $this->dao->SelectReservas();
-    }
+      function getAulasReservas()
+      {
+        return $this->dao->SelectReservas();
+      }
 
+      function getReservasExistente($nombreCortoAula,$fReserva,$horaIniresr,$horaFinreser)
+      {
+        return $this->dao->SelectReservasExistente($nombreCortoAula,$fReserva,$horaIniresr,$horaFinreser);
+      }
+
+      function getMisReservas($nickUsuario)
+      {
+        return $this->dao->SelectMisReservas($nickUsuario);
+      }
+
+      function getBusquedaReservaAula($nombreCortoAula)
+      {
+        return $this->dao->SelectReservasUnAula($nombreCortoAula);
+      }
           //Función que comprueba si existe el usuario
       function isLogged(){
           return isset ($_SESSION['usuario']);
@@ -150,10 +170,6 @@ function print_head($title="Página SEGEMP"){
           header ('Location: login.php'); //Solo se puede utilizar cuando no se ha escrito nada ni se ha mandado una petición al cliente.
       }
       
-
-        //Funcion que guarda el nombre de usuario en la variable
-        //$_SESSION cuando el usuario ha iniciado sesion en login.php
-
         function saveSession($usuario){
           $_SESSION['usuario']=$usuario;
 
