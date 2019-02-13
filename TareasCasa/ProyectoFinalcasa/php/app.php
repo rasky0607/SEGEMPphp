@@ -158,6 +158,11 @@ function print_head($title="Página SEGEMP"){
         return $this->dao->SelectMisReservas($nickUsuario);
       }
 
+      function getAnularReserva($nickUsuario,$nombeCortoAula,$fReserva,$horaIniresr,$horaFinreser)
+      {
+        return $this->dao->DeleteReserva($nickUsuario,$nombeCortoAula,$fReserva,$horaIniresr,$horaFinreser);
+      }
+
       function getBusquedaReservaAula($nombreCortoAula)
       {
         return $this->dao->SelectReservasUnAula($nombreCortoAula);

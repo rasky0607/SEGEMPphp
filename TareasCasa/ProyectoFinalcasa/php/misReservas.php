@@ -42,7 +42,7 @@ else
             "<td scope=\"row\">".$fila['fReserva']."</td>".
             "<td scope=\"row\">".$fila['horaIniresr']."</td>".
             "<td scope=\"row\">".$fila['horaFinreser']."</td>".
-            "<td scope=\"row\"> <a href='AnularReservaAula.php'/>ANULAR RESERVA</td>";//Por aqui
+            "<td scope=\"row\"> <a class=\"btn btn-primary\" href='AnularReservaAula.php?nombreCortoAula=".$fila['nombreCortoAula']."&fReserva=".$fila['fReserva']."&horaIniresr=".$fila['horaIniresr']."&horaFinreser=".$fila['horaFinreser']."&nickUsuario=".$nickUsuario."'/>ANULAR RESERVA</td>";//Anulacion de reserva
             echo "</tr>";
         }
 

@@ -214,7 +214,25 @@ class Dao{
             $this->error=$e->getMessage();
             }
     }
-
+    function DeleteReserva($nickUsuario,$nombeCortoAula,$fReserva,$horaIniresr,$horaFinreser)
+    {  
+        try{
+          
+            $sql="DELETE FROM ".TABLA_RESERVA." WHERE ".RESERVA_COLUMN_NICK_USUARIO."='".$nickUsuario."' AND ".RESERVA_COLUMN_NOMBRE_AULA."='".$nombeCortoAula."' AND ".RESERVA_COLUMN_FECHA."='".$fReserva."' AND ".RESERVA_COLUMN_HORAINIRESER."='".$horaIniresr."' AND ".RESERVA_COLUMN_HORAFINRESER."='".$horaFinreser."'";
+             echo $sql;           
+            $resultset=$this->conecxion->prepare($sql);
+            if($resultset->execute())
+            {     
+                echo" <h3><p class=\"text-center\">Reserva eliminada exitosamente.</p></h3>";
+            }
+    
+            }catch(PDOException $e)
+            {
+                echo"<h3><p class=\"text-center\">Eliminación de reserva fallida.<p></h3>".$e;
+            }
+        
+        
+    }
 
 }
 ?>
