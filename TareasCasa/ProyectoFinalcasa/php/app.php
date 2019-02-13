@@ -98,7 +98,8 @@ function print_head($title="Página SEGEMP"){
       function print_footer(){
        echo "<footer>
           <h4 class=\"text-center\">Pablo López</h4>
-          <a href='http://dominio.com/aviso-legal'>Política de cookies</a>         
+          <a href='http://dominio.com/aviso-legal'>Política de cookies</a> 
+          <h4 class=\"text-center\">Reservas de aulas comunes.</h4>        
         </footer>";
         }   
       

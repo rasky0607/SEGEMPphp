@@ -41,15 +41,19 @@ else
             "<td scope=\"row\"> <a href='reservaAula.php?nombreCortoAula=".$fila['nombreCortoAula']."'/>".$fila['nombreCortoAula']."</td>".
             "<td scope=\"row\">".$fila['fReserva']."</td>".
             "<td scope=\"row\">".$fila['horaIniresr']."</td>".
-            "<td scope=\"row\">".$fila['horaFinreser']."</td>";
+            "<td scope=\"row\">".$fila['horaFinreser']."</td>".
+            "<td scope=\"row\"> <a href='AnularReservaAula.php'/>ANULAR RESERVA</td>";//Por aqui
             echo "</tr>";
         }
 
         echo "</tbody>";
         echo "</table>";
     }
+
+
 }
 
 App::print_footer()
-
+//<input type="submit" value="Registrar" class="btn btn-primary">
+//"<td scope=\"row\"> <a href='AnularReservaAula.php'/>ANULAR RESERVA</td>"
 ?>
