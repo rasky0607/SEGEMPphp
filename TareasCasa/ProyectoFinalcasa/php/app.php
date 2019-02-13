@@ -98,9 +98,7 @@ function print_head($title="Página SEGEMP"){
       function print_footer(){
        echo "<footer>
           <h4 class=\"text-center\">Pablo López</h4>
-          <a href='http://dominio.com/aviso-legal'>Política de cookies</a>
-          <h4>Redes sociales</h4>
-          <a href='http://facebook.com/mi-pagina-de-facebook'>Mi Facebook</a>
+          <a href='http://dominio.com/aviso-legal'>Política de cookies</a>         
         </footer>";
         }   
       
@@ -125,6 +123,10 @@ function print_head($title="Página SEGEMP"){
         return $this->dao->InsertReserva($nickUsuario,$nombreCortoAula,$fReserva,$horaIniresr,$horaFinreser);
       }
 
+      function getSelectUsuario($usuario,$email)
+      {
+        return $this->dao-> SelectUsuario($usuario,$email);       
+      }
       function getAulas()
       {
         return $this->dao->SelectAulas();

@@ -69,6 +69,24 @@ class Dao{
 
     }
 
+    //Revisa si ya existe ese usuario o el correo a la hora de crear uno nuevo
+    function SelectUsuario($usuario,$email){
+        //$sql="SELECT * FROM ".TABLE_USER." WHERE ".COLUMN_USER_NAME."='".$user."' AND ".COLUMN_USER_PASSWORD." =sha1('".$password."')";
+    try{
+        $sql="SELECT * FROM ".TABLA_USUARIO." WHERE ".USUARIO_COLUMN_NICK."='".$usuario."' OR ".USUARIO_COLUMN_EMAIL."='".$email."'";
+        //echo $sql;     
+        $resultset=$this->conecxion->query($sql);      
+        if($resultset->rowCount()>=1)      
+            return true;
+        else
+        return false;
+        }
+        catch(PDOException $e){
+        $this->error=$e->getMessage();
+        }
+
+    }
+
 //Da de alta nuevo usuario
     function InsertNuevoUsuario($nick,$password,$nombre,$fnac,$email)
     {
@@ -78,12 +96,12 @@ class Dao{
         $resultset=$this->conecxion->prepare($sql);
         if($resultset->execute())
         {     
-            echo"<p class=\"text-center\"><h3>Creación de usuario exitosa</h3></p>";
+            echo"<h3><p class=\"text-center\">Creación de usuario exitosa</p></h3>";
         }
 
         }catch(PDOException $e)
         {
-            echo"<p class=\"text-center\"><h3>Creación de usuario fallida</h3></p> ".$e;
+            echo"<h3><p class=\"text-center\">Creación de usuario fallida</p></h3> ".$e;
         }
         
     }
@@ -137,7 +155,7 @@ class Dao{
     function SelectReservasExistente($nombreCortoAula,$fReserva,$horaIniresr,$horaFinreser)
     {
         try{
-            $sql="SELECT ".RESERVA_COLUMN_NICK_USUARIO.", ".RESERVA_COLUMN_NOMBRE_AULA.", ".RESERVA_COLUMN_FECHA.", ".RESERVA_COLUMN_HORAINIRESER.", ".RESERVA_COLUMN_HORAFINRESER." FROM ".TABLA_RESERVA." WHERE ".RESERVA_COLUMN_NOMBRE_AULA."='".$nombreCortoAula."' AND ".RESERVA_COLUMN_FECHA."='".$fReserva."' AND ".RESERVA_COLUMN_HORAINIRESER."='".$horaIniresr."' OR ".RESERVA_COLUMN_HORAFINRESER."='".$horaFinreser."'";
+            $sql="SELECT ".RESERVA_COLUMN_NICK_USUARIO.", ".RESERVA_COLUMN_NOMBRE_AULA.", ".RESERVA_COLUMN_FECHA.", ".RESERVA_COLUMN_HORAINIRESER.", ".RESERVA_COLUMN_HORAFINRESER." FROM ".TABLA_RESERVA." WHERE ".RESERVA_COLUMN_NOMBRE_AULA."='".$nombreCortoAula."' AND ".RESERVA_COLUMN_FECHA."='".$fReserva."' AND ".RESERVA_COLUMN_HORAINIRESER."='".$horaIniresr."' AND ".RESERVA_COLUMN_HORAFINRESER."='".$horaFinreser."'";
             //echo $sql;           
             $resultset = $this->conecxion->query($sql);          
             if($resultset->rowCount()>=1)      
@@ -160,12 +178,12 @@ class Dao{
             $resultset=$this->conecxion->prepare($sql);
             if($resultset->execute())
             {     
-                echo" <p class=\"text-center\"><h3>Reserva realizada exitosamente.</h3></p>";
+                echo" <h3><p class=\"text-center\">Reserva realizada exitosamente.</p></h3>";
             }
     
             }catch(PDOException $e)
             {
-                echo" <p class=\"text-center\"><h3>Reserva fallida.</h3><p>".$e;
+                echo"<h3><p class=\"text-center\">Reserva fallida.<p></h3>".$e;
             }
     }
 

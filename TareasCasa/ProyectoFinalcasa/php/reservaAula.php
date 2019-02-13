@@ -87,14 +87,16 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
     $horaIniResr=$_POST["horaIniresr"];
     $horaFinreser=$_POST["horaFinreser"];
 
+    $yaExiste=$app->getReservasExistente($nombreCortoAula,$fechaReserva,$horaIniResr,$horaFinreser);
+    var_dump($yaExiste);
     if(date($fechaReserva)<date("Y-m-d"))
         echo"<p class=\"text-center\">Las fecha de reserva no puede ser inferior a la actual</p>";
     else if(!ComparacionHoras($horaIniResr,$horaFinreser))
         echo"<p class=\"text-center\">La hora de inicio de la reserva no puede ser superior o igual a la de fin de la reserva<p/>";    
-    else if($app->getReservasExistente($nombreCortoAula,$fechaReserva,$horaIniResr,$horaFinreser == true))
+    else if($yaExiste == true)
     {
-        echo "<p class=\"text-center\">Ya existe una reserva para esa aula en esa fecha y esas horas.
-        </p>
+        echo "<h4><p class=\"text-center\">Ya existe una reserva para esa aula en esa fecha y esas horas.
+        </p></h4>
         <p class=\"text-center\">Datos:</p><p class=\"text-center\">-Nombre Aula: ".$nombreCortoAula."</p>
         <p class=\"text-center\">-Fecha: ".$fechaReserva."</p>
         <p class=\"text-center\">-Hora Inicio Reserva: ".$horaIniResr."</p>
@@ -128,5 +130,10 @@ function ComparacionHoras($horaInicio,$horafin)
 
     return false;
 }
+//echo"Datos: ".$nick." ".$nombreCortoAula." ".$fechaReserva." ".$horaIniResr." ".$horaFinreser;
+ /**
+     * 
 
+     * Consultar mis reservas cone l usuario que inicio sesion
+     */
 ?>

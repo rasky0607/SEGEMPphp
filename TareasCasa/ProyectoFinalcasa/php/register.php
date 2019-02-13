@@ -78,7 +78,11 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
     else if(!empty($password) && !empty($nick) && !empty($passwordconfir)&& !empty($nombre)&& !empty($fnac)&& !empty($email))//Si todo esta lleno
     {
         $app = new App();
-        $app->Registrarse($nick,$password,$nombre,$fnac,$email);
+        $yaexisteusuario = $app->getSelectUsuario($nick,$email);    
+        if(!$yaexisteusuario)
+            $app->Registrarse($nick,$password,$nombre,$fnac,$email);
+        else
+            echo"<br/><h5><p class=\"text-center\">El nombre de usuario '".$nick ."' o el correo: '".$email."' ya esta registrado.</p></h5>";
         
    
         
