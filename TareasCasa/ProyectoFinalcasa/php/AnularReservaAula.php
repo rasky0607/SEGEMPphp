@@ -48,6 +48,5 @@ if(!empty($nickUsuario)&&!empty($nombeCortoAula)&&!empty($fReserva)&&!empty($hor
         }
 }    
   
-
 App::print_footer();
 ?>
